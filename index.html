@@ -75,6 +75,133 @@
   </script>
 </head>
 <body>
+  <!-- Quick Quote Floating Button -->
+  <div class="quick-quote-button" id="quickQuoteBtn">
+    <span>Get Free Quote</span>
+    <i class="fas fa-chevron-right"></i>
+  </div>
+
+  <!-- Quick Quote Modal -->
+  <div class="quick-quote-modal" id="quickQuoteModal">
+    <div class="quick-quote-content">
+      <div class="quick-quote-header">
+        <h3>Get Your Free Estimate in 60 Seconds</h3>
+        <button class="close-modal" id="closeQuoteModal">&times;</button>
+      </div>
+      <div class="quick-quote-body">
+        <form id="quickEstimateForm" action="#" method="POST">
+          <div class="form-step active" id="step1">
+            <div class="step-indicator">Step 1 of 3</div>
+            <h4>What service do you need?</h4>
+            <div class="service-options">
+              <div class="service-option">
+                <input type="radio" id="service-collision" name="service-type" value="collision-repair" checked>
+                <label for="service-collision">
+                  <i class="fas fa-car-crash"></i>
+                  <span>Collision Repair</span>
+                </label>
+              </div>
+              <div class="service-option">
+                <input type="radio" id="service-painting" name="service-type" value="auto-painting">
+                <label for="service-painting">
+                  <i class="fas fa-spray-can"></i>
+                  <span>Auto Painting</span>
+                </label>
+              </div>
+              <div class="service-option">
+                <input type="radio" id="service-dent" name="service-type" value="dent-repair">
+                <label for="service-dent">
+                  <i class="fas fa-hammer"></i>
+                  <span>Dent Repair</span>
+                </label>
+              </div>
+              <div class="service-option">
+                <input type="radio" id="service-fleet" name="service-type" value="fleet-repair">
+                <label for="service-fleet">
+                  <i class="fas fa-truck-moving"></i>
+                  <span>Fleet Repair</span>
+                </label>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary btn-block next-step">Continue</button>
+          </div>
+          
+          <div class="form-step" id="step2">
+            <div class="step-indicator">Step 2 of 3</div>
+            <h4>Tell us about your vehicle</h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="quick-vehicle-make">Vehicle Make</label>
+                <input type="text" id="quick-vehicle-make" name="vehicle-make" placeholder="e.g., Ford" required>
+              </div>
+              <div class="form-group">
+                <label for="quick-vehicle-model">Vehicle Model</label>
+                <input type="text" id="quick-vehicle-model" name="vehicle-model" placeholder="e.g., F-150" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="quick-vehicle-year">Vehicle Year</label>
+              <select id="quick-vehicle-year" name="vehicle-year" required>
+                <option value="">Select Year</option>
+                <!-- JavaScript will populate years -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="quick-damage-description">Briefly describe the damage</label>
+              <textarea id="quick-damage-description" name="damage-description" rows="2" placeholder="e.g., Front bumper damage from collision"></textarea>
+            </div>
+            <div class="form-buttons">
+              <button type="button" class="btn btn-outline prev-step">Back</button>
+              <button type="button" class="btn btn-primary next-step">Continue</button>
+            </div>
+          </div>
+          
+          <div class="form-step" id="step3">
+            <div class="step-indicator">Step 3 of 3</div>
+            <h4>Your Contact Information</h4>
+            <div class="form-group">
+              <label for="quick-name">Full Name</label>
+              <input type="text" id="quick-name" name="name" placeholder="Your full name" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="quick-phone">Phone Number</label>
+                <input type="tel" id="quick-phone" name="phone" placeholder="(215) 555-1234" required>
+              </div>
+              <div class="form-group">
+                <label for="quick-email">Email Address</label>
+                <input type="email" id="quick-email" name="email" placeholder="your@email.com" required>
+              </div>
+            </div>
+            <div class="form-group form-checkbox">
+              <input type="checkbox" id="quick-insurance" name="insurance">
+              <label for="quick-insurance">I'll be using insurance for this repair</label>
+            </div>
+            <div class="form-group form-checkbox">
+              <input type="checkbox" id="quick-consent" name="consent" required>
+              <label for="quick-consent">I consent to receive text messages and emails about my estimate</label>
+            </div>
+            <div class="form-buttons">
+              <button type="button" class="btn btn-outline prev-step">Back</button>
+              <button type="submit" class="btn btn-primary btn-block">Get My Free Estimate</button>
+            </div>
+            <p class="privacy-note">By submitting this form, you agree to our <a href="#">privacy policy</a>. We'll contact you within 24 hours.</p>
+          </div>
+          
+          <div class="form-step" id="thankYouStep">
+            <div class="thank-you-message">
+              <i class="fas fa-check-circle"></i>
+              <h4>Thank You!</h4>
+              <p>Your estimate request has been submitted successfully. One of our specialists will contact you within 24 hours.</p>
+              <p class="estimate-number">Your estimate reference: <strong id="estimateReference">PHL-12345</strong></p>
+              <button type="button" class="btn btn-primary btn-block" id="closeThankYou">Close</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <header id="header">
     <div class="container">
       <div class="header-top">
@@ -101,12 +228,22 @@
         </div>
         <ul class="nav-menu" id="nav-menu">
           <li><a href="#home" class="active">Home</a></li>
-          <li><a href="#services">Services</a></li>
+          <li class="dropdown">
+            <a href="#services">Services <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="/services/fleet-repair.html">Fleet Repair</a></li>
+              <li><a href="/services/auto-painting.html">Auto Painting</a></li>
+              <li><a href="/services/dent-repair.html">Dent Repair</a></li>
+              <li><a href="/services/collision-repair.html">Collision Repair</a></li>
+              <li><a href="/services/auto-glass.html">Auto Glass Repair</a></li>
+              <li><a href="/services/classic-car-restoration.html">Classic Car Restoration</a></li>
+            </ul>
+          </li>
           <li><a href="#about">About Us</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#testimonials">Testimonials</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li class="cta-button"><a href="#quote">Get a Free Quote</a></li>
+          <li class="cta-button"><a href="#" id="navQuoteBtn">Get a Free Quote</a></li>
         </ul>
       </nav>
     </div>
@@ -120,8 +257,35 @@
         <h2 data-aos="fade-up" data-aos-delay="100">Expert Fleet Repair & Auto Painting Services</h2>
         <p data-aos="fade-up" data-aos-delay="200">Family-owned and operated since 1985, providing quality collision repair, dent removal, and auto painting services in Philadelphia.</p>
         <div class="hero-buttons" data-aos="fade-up" data-aos-delay="300">
-          <a href="#services" class="btn btn-primary">Our Services</a>
-          <a href="#contact" class="btn btn-secondary">Contact Us</a>
+          <a href="#" class="btn btn-primary" id="heroQuoteBtn">Get Free Estimate</a>
+          <a href="#services" class="btn btn-secondary">Our Services</a>
+        </div>
+        
+        <!-- Hero Quick Form -->
+        <div class="hero-quick-form" data-aos="fade-up" data-aos-delay="400">
+          <form id="heroQuickForm" action="#" method="POST">
+            <h3>Get Your Free Estimate Now</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <select name="service-type" required>
+                  <option value="">Select Service</option>
+                  <option value="collision-repair">Collision Repair</option>
+                  <option value="auto-painting">Auto Painting</option>
+                  <option value="dent-repair">Dent Repair</option>
+                  <option value="fleet-repair">Fleet Repair</option>
+                  <option value="auto-glass">Auto Glass</option>
+                  <option value="restoration">Classic Car Restoration</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <input type="tel" name="phone" placeholder="Your Phone Number" required>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Get Estimate</button>
+              </div>
+            </div>
+            <p class="form-note">We'll call you right back to provide your free estimate!</p>
+          </form>
         </div>
       </div>
     </section>
@@ -149,7 +313,7 @@
               <li>Business account management</li>
               <li>Mobile repair services</li>
             </ul>
-            <a href="#quote" class="btn btn-outline">Learn More</a>
+            <a href="#" class="btn btn-outline service-quote-btn" data-service="fleet-repair">Get Fleet Repair Quote</a>
           </div>
           
           <!-- Auto Painting Service -->
@@ -166,7 +330,7 @@
               <li>Spot painting and blending</li>
               <li>Environmental-friendly paints</li>
             </ul>
-            <a href="#quote" class="btn btn-outline">Learn More</a>
+            <a href="#" class="btn btn-outline service-quote-btn" data-service="auto-painting">Get Painting Quote</a>
           </div>
           
           <!-- Dent Repair Service -->
@@ -183,7 +347,7 @@
               <li>Minor collision dent repair</li>
               <li>Metal reshaping</li>
             </ul>
-            <a href="#quote" class="btn btn-outline">Learn More</a>
+            <a href="#" class="btn btn-outline service-quote-btn" data-service="dent-repair">Get Dent Repair Quote</a>
           </div>
           
           <!-- Collision Repair Service -->
@@ -200,7 +364,7 @@
               <li>Insurance claim assistance</li>
               <li>Computerized diagnostics</li>
             </ul>
-            <a href="#quote" class="btn btn-outline">Learn More</a>
+            <a href="#" class="btn btn-outline service-quote-btn" data-service="collision-repair">Get Collision Repair Quote</a>
           </div>
           
           <!-- Auto Glass Service -->
@@ -217,7 +381,7 @@
               <li>Back glass replacement</li>
               <li>OEM quality glass</li>
             </ul>
-            <a href="#quote" class="btn btn-outline">Learn More</a>
+            <a href="#" class="btn btn-outline service-quote-btn" data-service="auto-glass">Get Glass Repair Quote</a>
           </div>
           
           <!-- Restoration Service -->
@@ -234,7 +398,7 @@
               <li>Vintage paint matching</li>
               <li>Interior restoration</li>
             </ul>
-            <a href="#quote" class="btn btn-outline">Learn More</a>
+            <a href="#" class="btn btn-outline service-quote-btn" data-service="restoration">Get Restoration Quote</a>
           </div>
         </div>
       </div>
@@ -296,6 +460,15 @@
             <h3>Insurance Assistance</h3>
             <p>We work directly with all major insurance companies to make the claims process hassle-free for you.</p>
           </div>
+        </div>
+        
+        <!-- CTA Banner -->
+        <div class="cta-banner" data-aos="fade-up">
+          <div class="cta-content">
+            <h3>Ready to get your vehicle repaired?</h3>
+            <p>Get your free estimate today and experience our exceptional service!</p>
+          </div>
+          <a href="#" class="btn btn-primary" id="chooseCTA">Get Free Estimate</a>
         </div>
       </div>
     </section>
@@ -456,7 +629,7 @@
         
         <div class="gallery-cta" data-aos="fade-up">
           <p>Want to see more examples of our work?</p>
-          <a href="#contact" class="btn btn-primary">Contact Us for More Photos</a>
+          <a href="#" class="btn btn-primary" id="galleryCTA">Get a Free Quote Now</a>
         </div>
       </div>
     </section>
@@ -548,6 +721,15 @@
             </a>
           </div>
         </div>
+        
+        <!-- Testimonial CTA -->
+        <div class="testimonial-cta" data-aos="fade-up">
+          <div class="testimonial-cta-content">
+            <h3>Join our satisfied customers!</h3>
+            <p>Experience the quality service that has earned us over 300 5-star reviews.</p>
+          </div>
+          <a href="#" class="btn btn-primary" id="testimonialCTA">Get Your Free Quote</a>
+        </div>
       </div>
     </section>
 
@@ -579,41 +761,55 @@
                 <span>Transparent pricing - no hidden fees</span>
               </div>
             </div>
+            
+            <!-- Customer Testimonial in Quote Section -->
+            <div class="quote-testimonial">
+              <div class="quote-testimonial-content">
+                <i class="fas fa-quote-left"></i>
+                <p>"I received my estimate within hours and the final cost matched exactly what was quoted. No surprises!"</p>
+                <div class="quote-testimonial-author">
+                  <strong>Robert K.</strong>, Philadelphia
+                </div>
+              </div>
+            </div>
           </div>
           
           <div class="quote-form" data-aos="fade-left">
             <form id="estimateForm" action="#" method="POST">
               <div class="form-group">
                 <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" placeholder="Your full name" required>
               </div>
               
               <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required>
               </div>
               
               <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required>
+                <input type="tel" id="phone" name="phone" placeholder="(215) 555-1234" required>
               </div>
               
               <div class="form-row">
                 <div class="form-group">
                   <label for="vehicle-make">Vehicle Make</label>
-                  <input type="text" id="vehicle-make" name="vehicle-make" required>
+                  <input type="text" id="vehicle-make" name="vehicle-make" placeholder="e.g., Ford" required>
                 </div>
                 
                 <div class="form-group">
                   <label for="vehicle-model">Vehicle Model</label>
-                  <input type="text" id="vehicle-model" name="vehicle-model" required>
+                  <input type="text" id="vehicle-model" name="vehicle-model" placeholder="e.g., F-150" required>
                 </div>
               </div>
               
               <div class="form-row">
                 <div class="form-group">
                   <label for="vehicle-year">Vehicle Year</label>
-                  <input type="number" id="vehicle-year" name="vehicle-year" min="1900" max="2099" required>
+                  <select id="vehicle-year" name="vehicle-year" required>
+                    <option value="">Select Year</option>
+                    <!-- JavaScript will populate years -->
+                  </select>
                 </div>
                 
                 <div class="form-group">
@@ -633,7 +829,7 @@
               
               <div class="form-group">
                 <label for="message">Describe the damage or service needed</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
+                <textarea id="message" name="message" rows="4" placeholder="Please provide details about the damage or service you need" required></textarea>
               </div>
               
               <div class="form-group">
@@ -802,6 +998,15 @@
             </div>
           </div>
         </div>
+        
+        <!-- FAQ CTA -->
+        <div class="faq-cta" data-aos="fade-up">
+          <p>Have more questions? We're here to help!</p>
+          <div class="faq-cta-buttons">
+            <a href="tel:+12155551234" class="btn btn-secondary"><i class="fas fa-phone"></i> Call Us</a>
+            <a href="#" class="btn btn-primary" id="faqCTA">Get a Free Quote</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -812,6 +1017,11 @@
         <div class="footer-logo">
           <h2>Auto Body Shop Philadelphia</h2>
           <p>Quality auto body repair services since 1985</p>
+          
+          <!-- Footer CTA -->
+          <div class="footer-cta">
+            <a href="#" class="btn btn-primary" id="footerCTA">Get Your Free Estimate</a>
+          </div>
         </div>
         
         <div class="footer-nav">
