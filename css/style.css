@@ -30,8 +30,8 @@
   --danger: #e76f51;
   
   /* Typography */
-  --heading-font: 'Montserrat', sans-serif;
-  --body-font: 'Roboto', sans-serif;
+  --heading-font: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --body-font: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -80,6 +80,17 @@ body {
   color: var(--gray-dark);
   background-color: var(--white);
   overflow-x: hidden;
+}
+
+/* Font loading states */
+.fonts-failed body,
+.fonts-timeout body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.fonts-failed h1, .fonts-failed h2, .fonts-failed h3, .fonts-failed h4, .fonts-failed h5, .fonts-failed h6,
+.fonts-timeout h1, .fonts-timeout h2, .fonts-timeout h3, .fonts-timeout h4, .fonts-timeout h5, .fonts-timeout h6 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1956,4 +1967,21 @@ input.error, select.error, textarea.error {
   .service-options {
     grid-template-columns: 1fr;
   }
+}
+
+/* Font display optimization */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
 }
